@@ -1,9 +1,10 @@
-[Ll]ibrary/
-[Tt]emp/
-[Oo]bj/
-[Bb]uild/
-[Bb]uilds/
-Assets/AssetStoreTools*
+AspectRatioControllerTest/[Ll]ibrary/
+AspectRatioControllerTest/[Tt]emp/
+AspectRatioControllerTest/[Oo]bj/
+AspectRatioControllerTest/[Bb]uild/
+AspectRatioControllerTest/[Bb]uilds/
+AspectRatioControllerTest/[Bb]in/
+AspectRatioControllerTest/Assets/AssetStoreTools*
 
 # Visual Studio cache directory
 .vs/
