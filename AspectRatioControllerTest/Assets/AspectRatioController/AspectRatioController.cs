@@ -394,7 +394,8 @@ public class AspectRatioController : MonoBehaviour
                     // Current resolution is on target aspect ratio.
                     return true;
                 }
-            }        }
+            }
+        }
         else if (!Screen.fullScreen)
         {
             // Save resolution of the current screen.
