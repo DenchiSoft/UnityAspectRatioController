@@ -369,8 +369,32 @@ public class AspectRatioController : MonoBehaviour
             setHeight = Screen.height;
             setWidth = Mathf.RoundToInt(Screen.height * aspect);
 
-            Screen.SetResolution(setWidth, setHeight, Screen.fullScreen);
-            resolutionChangedEvent.Invoke(setWidth, setHeight, Screen.fullScreen);
+            // Aero Snap aka "Snap your windows" always triggers when resizing. It causes blinking, stuttering, centers on resizing, and isn't smooth during resize.
+            // To fix that, we need to change the resolution when the aspect ratio is off the target Aspect Ratio.
+            // This will make resizing buttery smooth and disable Aero Snap aka "Snap your windows".
+            if (!IsAspectRatioValid(Screen.width, Screen.height))
+            {
+                Screen.SetResolution(setWidth, setHeight, Screen.fullScreen);
+                resolutionChangedEvent.Invoke(setWidth, setHeight, Screen.fullScreen);
+            }
+
+            bool IsAspectRatioValid(int screenWidth, int screenHeight)
+            {
+                float currentAspectRatio = (float)screenWidth / screenHeight;
+                float targetAspectRatio = (aspectRatioWidth / aspectRatioHeight);
+                float tolerance = 0.01f;
+
+                if (Mathf.Abs(currentAspectRatio - targetAspectRatio) > tolerance) // Check with a small tolerance due to float imprecision
+                {
+                    // Current resolution is off target aspect ratio.
+                    return false;
+                }
+                else
+                {
+                    // Current resolution is on target aspect ratio.
+                    return true;
+                }
+            }
         }
         else if (!Screen.fullScreen)
         {
